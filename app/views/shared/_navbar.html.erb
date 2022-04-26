@@ -14,17 +14,14 @@
         <li class="nav-item active">
           <%= link_to "Home", root_path, class: "nav-link text-white" %>
         </li>
+        <li class = "nav-item">
+          <%= link_to "About", page_path('about'), class: "nav-link text-white" %>
+        </li>
         <li class="nav-item">
           <%= link_to "Posts", posts_path, class: "nav-link text-white" %>
         </li>
         <li class = "nav-item">
-          <%= link_to "About", page_path('about'), class: "nav-link text-white" %>
-        </li>
-        <li class = "nav-item">
-            <%= link_to "Meetings", page_path('meetings'), class: "nav-link text-white" %>
-        </li>
-        <li class = "nav-item">
-            <%= link_to "Issues", page_path('issues'), class: "nav-link text-white" %>
+            <%= link_to "Meetings", meetings_path, class: "nav-link text-white" %>
         </li>
         <li class = "nav-item">
             <%= link_to "Membership", page_path('membership'), class: "nav-link text-white" %>
@@ -33,19 +30,24 @@
             <%= link_to "Docs", page_path('docs'), class: "nav-link text-white" %>
         </li>
         <% if user_signed_in? %>
-          <li class="nav-item dropdown">
-            <%= link_to "John Smith", class: "nav-link text-white", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-            </div>
-          </li>
+          
+        <div class="dropdown">
+          <p class="nav-link dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            John Smith
+          </p>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </div>
+          
+          
+
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Login", new_user_session_path, class: "nav-link text-white" %>
           </li>
         <% end %>
+
+        </div>
       </ul>
     </div>
   </div>
