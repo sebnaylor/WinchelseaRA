@@ -1,7 +1,7 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar">
   <div class="container-fluid">
     <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+      <%= image_tag asset_path("winchelsea_logo_text") %>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,15 +10,31 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
+
+        <li class="nav-item active">
+          <%= link_to "Home", root_path, class: "nav-link text-white" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Posts", posts_path, class: "nav-link text-white" %>
+        </li>
+        <li class = "nav-item">
+          <%= link_to "About", page_path('about'), class: "nav-link text-white" %>
+        </li>
+        <li class = "nav-item">
+            <%= link_to "Meetings", page_path('meetings'), class: "nav-link text-white" %>
+        </li>
+        <li class = "nav-item">
+            <%= link_to "Issues", page_path('issues'), class: "nav-link text-white" %>
+        </li>
+        <li class = "nav-item">
+            <%= link_to "Membership", page_path('membership'), class: "nav-link text-white" %>
+        </li>
+        <li class = "nav-item">
+            <%= link_to "Docs", page_path('docs'), class: "nav-link text-white" %>
+        </li>
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
           <li class="nav-item dropdown">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <%= link_to "John Smith", class: "nav-link text-white", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Action", "#", class: "dropdown-item" %>
               <%= link_to "Another action", "#", class: "dropdown-item" %>
