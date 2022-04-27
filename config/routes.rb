@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :comments, only:[:create, :update, :destroy]
   end
   resources :meetings
-  # devise_for :users
+  devise_for :users
   root to: 'pages#home'
   get 'public_toilets_survey', to: "pages#public_toilets_survey"
   get 'facts_figures', to: "pages#facts_figures"
