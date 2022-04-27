@@ -33,7 +33,7 @@
           
         <div class="dropdown">
           <p class="nav-link dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            John Smith
+            <%= current_user.name %>
           </p>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
