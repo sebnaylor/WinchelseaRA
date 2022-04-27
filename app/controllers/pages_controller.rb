@@ -1,11 +1,9 @@
 class PagesController < ApplicationController
-  include HighVoltage::StaticPage
-  skip_before_action :authenticate_user!
-  layout :layout_for_page
-
-
 
   def home
+  end
+  
+  def show
   end
 
   def public_toilets_survey

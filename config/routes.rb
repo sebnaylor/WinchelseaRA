@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   get 'gta_report', to: "pages#gta_report"
   get 'gta_report_response', to: "pages#gta_report_response"
   get 'wra_constitution', to: "pages#wra_constitution"
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
