@@ -1,5 +1,4 @@
 class MeetingsController < ApplicationController
-    skip_before_action :authenticate_user!
     before_action :set_meeting, only: %i[ show edit update destroy ]
   
     # GET /meetings or /meetings.json
