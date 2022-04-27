@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :posts do
-    resources :votes, only:[:create, :update, :destroy]
-    resources :comments, only:[:create, :update, :destroy]
+    resources :votes, only:[:index, :new, :create, :update, :destroy]
+    resources :comments, only:[:new, :create, :update, :destroy]
   end
   resources :meetings
   devise_for :users

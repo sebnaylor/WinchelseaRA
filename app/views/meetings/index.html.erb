@@ -1,36 +1,19 @@
 <%# Converted - needs testing %>
-<p id="notice"><%= notice %></p>
+<%# <p id="notice"><%= notice %>
 
 <div class="container">
   <h1>Meetings</h1>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Venue</th>
-        <th>Agenda</th>
-        <th>Minutes</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+  <% @meetings.each do |meeting| %>
+    <h3><%= meeting.time %> <%= meeting.date %></h3>
+    <h5>Venue: <%= meeting.venue %></h5>
+    <p>Agenda: <%= meeting.agenda %></p>
+    <p>Minutes: <%= meeting.minutes %></p>
 
-    <tbody>
-      <% @meetings.each do |meeting| %>
-        <tr>
-          <td class="p-2"><%= meeting.date %></td>
-          <td class="p-2"><%= meeting.time %></td>
-          <td class="p-2"><%= meeting.venue %></td>
-          <td class="p-2"><%= meeting.agenda %></td>
-          <td class="p-2"><%= meeting.minutes %></td>
-          <td class="p-2"><%= link_to 'Show', meeting %></td>
-          <td class="p-2"><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
-          <td class="p-2"><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <p><%= link_to 'Show', meeting %></p>
+    <p><%= link_to 'Edit', edit_meeting_path(meeting) %></p>
+    <p><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% end %>
 
   <br>
 
