@@ -1,5 +1,6 @@
 class VotesController < ApplicationController
     def new
+        @post = Post.find(params[:post_id])
         @vote = Vote.new
     end
 
@@ -7,7 +8,11 @@ class VotesController < ApplicationController
         @post = Post.find(params[:post_id])
         @vote = Vote.new(vote_params)
         @vote.post = @post
-        raise
+        if @vote.save
+            redirect_to posts_path
+          else
+            render :new
+          end
     end
 
     def update

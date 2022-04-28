@@ -1,16 +1,17 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
   <h1 class="h1">Posts</h1>
-  <%= link_to 'New Post', new_post_path, class: "btn btn-primary" %>
+  <%= link_to 'New Post', new_post_path(:user_id => current_user.id), class: "btn btn-primary" %>
   <% @posts.each do |post| %>
     <div class="card bg-dark m-2">
       <div class="card-body">
         <h5 ><%= link_to post.title, post, class: "card-title text-white" %></h5>
         <h6 class="card-subtitle mb-2 text-muted"><%= post.user.name %></h6>
         <p class="card-text"><%= post.text %></p>
-        <a href= "<% post_votes_path(post)%>" class="btn btn-success">Upvote</a>
-        <a href="#" class="btn btn-danger text-white">Downvote</a>
-        <p>Votes: <%=post.votes.count  %></p>
+
+        <%= link_to 'Upvote', new_post_vote_path(post, :upvote => "true"), class: "btn btn-success" %>
+        <%= link_to 'Downvote', new_post_vote_path(post, :upvote => "false"), class: "btn btn-danger text-white" %>
+        <p>Votes: <%=((post.votes.where( upvote: true).count) - post.votes.where( upvote: false).count) %></p>
         <% if current_user = post.user_id %>
         <p><%= link_to 'Edit', edit_post_path(post) %></p>
         <p><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></p>

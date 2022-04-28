@@ -1,0 +1,19 @@
+
+<%= simple_form_for [@post , @vote ] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <% if params[:upvote] == 'true' %>
+    <%= f.input :upvote, as: :boolean, input_html: {checked: true} %>
+    <% elsif params[:upvote] == 'false' %>
+    <%= f.input :upvote, as: :boolean %>    
+    <% end %>
+    <%= f.association :post, selected: params[:post_id] %>
+    <%  %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
