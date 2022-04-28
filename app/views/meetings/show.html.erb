@@ -2,29 +2,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @meeting.time %>
-</p>
+<div class="container">
+  <div class="p-2">
+  <h3><%= @meeting.time %> <%= @meeting.date %></h3>
+  <h5>Venue: <%= @meeting.venue %></h5>
+  <div id="module">
+    <p class="collapse" id="collapseExample" aria-expanded="false">Agenda: <%= @meeting.agenda %></p>
+    <a role="button" class="collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></a>
+  </div>
+  <div id="module">
+    <p class="collapse" id="collapseExample" aria-expanded="false">Minutes: <%= @meeting.minutes %></p>
+    <a role="button" class="collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></a>
+  </div>
+  <div class="d-flex">
+    <p><%= link_to 'Back to Meetings', meetings_path, class: "btn btn-primary text-white my-2"%></p>
+    <p><%= link_to 'Edit', edit_meeting_path(@meeting), class: "btn btn-secondary m-2" %></p>
+    <p><%= link_to 'Delete', @meeting, class: "btn btn-danger text-white my-2" ,method: :delete, data: { confirm: 'Are you sure?' } %></p>
 
-<p>
-  <strong>Text:</strong>
-  <%= @meeting.date %>
-</p>
+  
+  </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @meeting.venue %>
-</p>
 
-<p>
-  <strong>User:</strong>
-  <%= @meeting.agenda %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @meeting.minutes %>
-</p>
-
-<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
-<%= link_to 'Back', meetings_path %>

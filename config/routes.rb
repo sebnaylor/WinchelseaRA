@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :meetings
   devise_for :users
   root to: 'pages#home'
+  get 'create_vote', to: "votes#create", as: :create_vote
   get 'public_toilets_survey', to: "pages#public_toilets_survey"
   get 'facts_figures', to: "pages#facts_figures"
   get 'gta_report', to: "pages#gta_report"

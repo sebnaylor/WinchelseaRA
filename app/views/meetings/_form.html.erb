@@ -4,14 +4,17 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :date, as: :date %>
-    <%= f.input :time %> 
-    <%= f.input :venue %> 
+    <div class="d-flex">
+      <%= f.input :date, as: :date, html5: true, input_html: { class: "m-1" } %>
+      <%= f.input :time, input_html: { class: "my-1" }%> 
+      <%= f.input :venue, input_html: { class: "m-1" }%> 
+    </div>
     <%= f.input :agenda %> 
     <%= f.input :minutes %> 
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class:"btn btn-primary my-2" %>
+    <%= link_to 'Back', meetings_path, class:"btn btn-secondary my-2" %>
   </div>
 <% end %>
