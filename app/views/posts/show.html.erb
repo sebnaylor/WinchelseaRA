@@ -1,21 +1,22 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <h3 class="my-3"><%= @post.title %></h3>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+  <p>
+    <%= @post.text %>
+  </p>
 
-<p>
-  <strong>Text:</strong>
-  <%= @post.text %>
-</p>
+  <p>Posted by: <%= @post.user.name %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @post.user_id %>
-</p>
+  <%= link_to 'Upvote', new_post_vote_path(@post, :upvote => "true"), class: "btn btn-success my-1" %>
+  <%= link_to 'Downvote', new_post_vote_path(@post, :upvote => "false"), class: "btn btn-danger text-white mx-1" %>
+  <p><%= link_to 'All Posts', posts_path, class: "btn btn-primary my-3" %></p>
 
-<%= link_to 'Upvote', new_post_vote_path(@post.id), class: "btn btn-success" %>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+  
+  <% if current_user == @post.user %>
+  <p class="h3">Author actions:</p>
+  <div class="d-flex my-2">
+    <p><%= link_to 'Edit', edit_post_path(@post), class: "btn btn-secondary my-2" %></p>
+    <p><%= link_to 'Delete', @post, class: "btn btn-danger m-2 text-white", method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% end %>
+</div>

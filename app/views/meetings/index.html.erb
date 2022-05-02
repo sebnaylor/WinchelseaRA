@@ -1,29 +1,19 @@
-<%# Converted - needs testing %>
-<%# <p id="notice"><%= notice %>
-
 <div class="container">
-  <h1 class="my-2">Meetings</h1>
+  <h2 class="my-2">Meetings</h2>
+  <%= link_to 'New Meeting', new_meeting_path, class: "btn btn-success mb-2" %>
   <br>
   <% @meetings.each do |meeting| %>
-    <div class="border-top border-bottom border-light p-2">
-      <h3><%= meeting.time %> <%= meeting.date %></h3>
-      <h5>Venue: <%= meeting.venue %></h5>
-      <div id="module">
-        <p class="collapse" id="collapseExample" aria-expanded="false">Agenda: <%= meeting.agenda %></p>
-        <a role="button" class="collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></a>
-      </div>
-      <div id="module">
-        <p class="collapse" id="collapseExample" aria-expanded="false">Minutes: <%= meeting.minutes %></p>
-        <a role="button" class="collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></a>
-      </div>
-      <div class="d-flex">
-        <p><%= link_to 'View Meeting', meeting, class: "btn btn-primary my-2" %></p>
-        <p><%= link_to 'Edit', edit_meeting_path(meeting), class: "btn btn-secondary m-2" %></p>
-        <p><%= link_to 'Delete', meeting, class: "btn btn-danger text-white my-2" ,method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      <div class="card bg-light my-2">
+      <div class="card-body">
+        <h5 class="text-black"><%= meeting.time %> <%= meeting.date.strftime("%A, %B %e, %Y") %> </h5>
+        <h6 class="card-subtitle mb-2 text-muted">Venue: <%= meeting.venue %></h6>
+        <p class="text-black text-truncate" >Agenda: <%= meeting.agenda %></p>
+        <p class="text-black text-truncate" >Minutes: <%= meeting.minutes %></p>
+        <p> <%= link_to 'View Meeting', meeting, class: "btn btn-primary" %>
       </div>
     </div>
-  <% end %>
-  <br>
 
-  <%= link_to 'New Meeting', new_meeting_path, class: "btn btn-primary mb-2" %>
+
+
+  <% end %>
 </div>

@@ -1,25 +1,17 @@
-<%# Converted - needs testing %>
-<p id="notice"><%= notice %></p>
-
-<p>
 <div class="container">
-  <div class="p-2">
-  <h3><%= @meeting.time %> <%= @meeting.date %></h3>
-  <h5>Venue: <%= @meeting.venue %></h5>
-  <div id="module">
-    <p class="collapse" id="collapseExample" aria-expanded="false">Agenda: <%= @meeting.agenda %></p>
-    <a role="button" class="collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></a>
-  </div>
-  <div id="module">
-    <p class="collapse" id="collapseExample" aria-expanded="false">Minutes: <%= @meeting.minutes %></p>
-    <a role="button" class="collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></a>
-  </div>
+  <h3 class="my-3"><%= @meeting.time %> <%= @meeting.date.strftime("%A, %B %e, %Y") %></h3>
+  <p>Venue: <%= @meeting.venue %></p>
+  <p class="h4">Agenda: </p>
+  <p><%= @meeting.agenda %></p>
+  <p class="h4">Minutes:</p>
+  <p><%= @meeting.minutes %></p>
+  <p><%= link_to 'All Meetings', meetings_path, class: "btn btn-primary text-white my-2"%></p>
   <div class="d-flex">
-    <p><%= link_to 'Back to Meetings', meetings_path, class: "btn btn-primary text-white my-2"%></p>
-    <p><%= link_to 'Edit', edit_meeting_path(@meeting), class: "btn btn-secondary m-2" %></p>
-    <p><%= link_to 'Delete', @meeting, class: "btn btn-danger text-white my-2" ,method: :delete, data: { confirm: 'Are you sure?' } %></p>
-
-  
+    <% if current_user == @meeting.user %>
+      <p><%= link_to 'Edit', edit_meeting_path(@meeting), class: "btn btn-secondary my-2" %></p>
+      <p><%= link_to 'Delete', @meeting, class: "btn btn-danger text-white m-2" ,method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    <% end %>
   </div>
+</div>
 
 
