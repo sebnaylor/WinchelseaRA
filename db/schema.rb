@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_26_123758) do
+ActiveRecord::Schema.define(version: 2022_05_02_163719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2022_04_26_123758) do
     t.text "minutes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_meetings_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -62,10 +64,14 @@ ActiveRecord::Schema.define(version: 2022_04_26_123758) do
     t.bigint "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["post_id"], name: "index_votes_on_post_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
   add_foreign_key "comments", "posts"
+  add_foreign_key "meetings", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "votes", "posts"
+  add_foreign_key "votes", "users"
 end
