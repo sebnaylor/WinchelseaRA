@@ -1,4 +1,28 @@
 .about img {
-    width: 400px;
+    width: 300px;
     object-fit: contain;
+    align-self: center;
+}
+
+.about {
+    display: grid;
+
+}
+
+@media screen and (min-width: 700px){
+    .about {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+    }
+    .about img {
+        align-self: flex-start;
+    }
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    line-height: 2;
 }
