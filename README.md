@@ -1,4 +1,4 @@
-# Project Title
+# WinchelseaRA
 
 App built for the Winchelsea Residents' Association to allow residents to post and vote on issues affecting them in the town of Winchelsea, Sussex.
 ## Features
