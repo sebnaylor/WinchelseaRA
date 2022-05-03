@@ -1,12 +1,11 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[show edit update destroy]
   before_action :authenticate_user!
 
   # GET /posts or /posts.json
   def index
     @posts = Post.all
   end
-false
 
   # GET /posts/1 or /posts/1.json
   def show
@@ -24,8 +23,6 @@ false
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
-    @user = current_user
-
     respond_to do |format|
       if @post.save
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
@@ -61,13 +58,14 @@ false
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:title, :text, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:post).permit(:title, :text, :user_id)
+  end
 end
