@@ -17,9 +17,19 @@
         <li class = "nav-item">
           <%= link_to "About", page_path('about'), class: "nav-link text-white" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Posts", posts_path, class: "nav-link text-white" %>
-        </li>
+
+        <div class="dropdown">
+          <p class="nav-link dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Posts
+          </p>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to "View Posts", posts_path, class: "nav-link" %>
+            <% if user_signed_in? %>
+              <%= link_to "New Post", new_post_path(:user_id => current_user.id), class: "nav-link" %>
+            <% end %>
+          </div> 
+        </div>
+
         <li class = "nav-item">
             <%= link_to "Meetings", meetings_path, class: "nav-link text-white" %>
         </li>

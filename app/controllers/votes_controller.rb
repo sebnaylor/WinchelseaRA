@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+    before_action :authenticate_user!, only: %i[new edit create update destroy]
+
     def new
         @post = Post.find(params[:post_id])
         vote = Vote.new do |v|
@@ -8,7 +10,7 @@ class VotesController < ApplicationController
             if v.save 
                 redirect_to post_path(@post)
             else
-                render :info
+                redirect_to post_url(@post), alert: "You may only vote on a post once." 
             end
         end
     
