@@ -5,7 +5,7 @@
   <% @meetings.each do |meeting| %>
       <div class="card bg-light my-2">
       <div class="card-body">
-        <h5 class="text-black"><%= meeting.time %> <%= meeting.date.strftime("%A, %B %e, %Y") %> </h5>
+        <h5 class="text-black"><%= meeting.date.strftime("%I:%M %p %A, %B %e, %Y") %> </h5>
         <h6 class="card-subtitle mb-2 text-muted">Venue: <%= meeting.venue %></h6>
         <p class="text-black text-truncate" >Agenda: <%= meeting.agenda %></p>
         <p class="text-black text-truncate" >Minutes: <%= meeting.minutes %></p>

@@ -1,14 +1,25 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[new edit create update destroy]
 
   # GET /posts or /posts.json
   def index
     @posts = Post.all
+    @sorted_posts = @posts.order('created_at DESC')
+    if params[:query].present?
+      @sorted_posts = Post.where(title: params[:query])
+      sql_query = "title ILIKE :query OR text ILIKE :query"
+      @sorted_posts = Post.where(sql_query, query: "%#{params[:query]}%")
+    else
+      @sorted_posts = Post.all
+    end
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    @post = Post.find(params[:id])
+    @post_upvotes = @post.votes.where(upvote: true)
+    @post_downvotes = @post.votes.where(upvote: false)
   end
 
   # GET /posts/new

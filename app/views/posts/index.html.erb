@@ -1,33 +1,37 @@
 <div class="container">
-  <h2 class="my-2">Posts</h2>
-  <%= link_to 'New Post', new_post_path(:user_id => current_user.id), class: "btn btn-success mb-2" %>
-  <% @posts.each_with_index do |post, index| %>
+  <div class="d-flex justify-content-between align-items-center">
+    <h2 class="my-2">Posts</h2>
+    <p>Sorted by: Most recent first</p>
+  </div>
+
+  <%= form_tag posts_path, method: :get do %>
+    <div class="d-flex justify-content-between align-items-center">
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Search a post"
+      %>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <% @sorted_posts.each_with_index do |post, index| %>
     <div class="card bg-light my-2">
       <div class="card-body">
         <h5 class="text-black"><%= post.title %></h5>
         <h6 class="card-subtitle mb-2 text-muted">Author: <%= post.user.name %></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Created: <%= post.created_at.strftime("%A, %B %e, %Y") %></h6>
         <p class="text-black text-truncate" ><%= post.text %></p>
         <p> <%= link_to 'View Post', post, class: "btn btn-primary my-2" %>
-        <p>
-          <button class="btn btn-secondary" type="button" data-toggle="collapse" 
-          data-target="#multiCollapseExample<%= index %>" aria-expanded="false" 
-          aria-controls="multiCollapseExample2">Net Votes: <%= ((post.votes.where( upvote: true).count) - post.votes.where( upvote: false).count) %></button>
-        </p>
-        <div class="row">
-          <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample<%= index %>">
-              <div class="card card-body text-black">
-                <strong><%= post.votes.where(upvote: true).count %> members upvoted:</strong> 
-                <% post.votes.where( upvote: true).each do |vote| %>
-                  <%= vote.user.name %>
-                <% end %>
-                <br>
-                <strong><%= post.votes.where(upvote: false).count %> members downvoted:</strong>
-                <% post.votes.where( upvote: false).each do |vote| %>
-                  <%= vote.user.name %>
-                <% end %>
-              </div>
-            </div>
+                
+        <div class="votes">
+          <div class= "upvotes d-flex align-items-center my-2">
+            <p class="mx-1"><%= post.votes.where(upvote: true).count %></p>
+            <i class="fa-solid fa-thumbs-up fa-xl"></i>
+          </div>
+          <div class="downvotes d-flex align-items-center my-2">
+            <p class="mx-1"><%= post.votes.where(upvote: false).count %></p>
+            <i class="fa-solid fa-thumbs-down fa-xl"></i>
           </div>
         </div>
       </div>
