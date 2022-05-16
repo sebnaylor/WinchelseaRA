@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'devise'
 gem 'high_voltage', '~> 3.1'
+gem 'rails_admin', '~> 2.0'
 
 gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass'

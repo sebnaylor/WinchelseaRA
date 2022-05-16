@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :posts do
     resources :votes, only:[:index, :new, :create, :update, :destroy]
     resources :comments, only:[:new, :create, :update, :destroy]
