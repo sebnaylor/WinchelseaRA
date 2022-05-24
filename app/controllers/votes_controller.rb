@@ -1,52 +1,58 @@
 class VotesController < ApplicationController
-    before_action :authenticate_user!, only: %i[new edit create update destroy]
+  before_action :authenticate_user!, only: %i[new edit create update destroy]
 
-    def new
-        @post = Post.find(params[:post_id])
-        vote = Vote.new do |v|
-            v.post = @post
-            v.upvote = params[:upvote]
-            v.user = current_user
-            if v.save 
-                redirect_to post_path(@post)
-            else
-                redirect_to post_url(@post), alert: "You may only vote on a post once." 
-            end
-        end
-    
-    end
+  def new
+    @post = Post.find(params[:post_id])
+    Vote.new do |v|
+      v.post = @post
+      v.upvote = params[:upvote]
+      v.user = current_user
+      prev_vote = find_previous_vote
 
-    def create
-        @post = Post.find(params[:post_id])
-        @vote = Vote.new(vote_params)
-        @vote.post = @post
-        if @vote.save
-            redirect_to posts_path
-          else
-            render :new
-          end
+      if prev_vote.upvote != true?(params['upvote'])
+        prev_vote.upvote = true?(params['upvote'])
+        prev_vote.save
+        redirect_to post_path(@post)
+      elsif v.save
+        redirect_to post_path(@post)
+      else
+        redirect_to post_url(@post), alert: "You may only vote on a post once."
+      end
     end
+  end
 
-    def update
-    
-    end
+  def create
+  end
 
-    def destroy
-     
-    end
+  def update
+  end
 
-    def up_vote
-        @post = Post.find(params[:post_id])
-        @vote = Vote.new(vote_params)
-        @vote.post = @post
-        if @vote.save
-            redirect_to posts_path
-          else
-            render :new
-          end
+  def destroy
+  end
+
+  def up_vote
+    @post = Post.find(params[:post_id])
+    @vote = Vote.new(vote_params)
+    @vote.post = @post
+    if @vote.save
+      redirect_to posts_path
+    else
+      render :new
     end
-    private
-    def vote_params
-        params.require(:vote).permit(:upvote, :post_id)
-    end
+  end
+
+  def find_previous_vote
+    post = Post.find(params["post_id"].to_i)
+    vote = post.votes.where(user_id: current_user).map(&:attributes)
+    Vote.find(vote[0]['id'])
+  end
+
+  def true?(obj)
+    obj.to_s.downcase == "true"
+  end
+
+  private
+  def vote_params
+    params.require(:vote).permit(:upvote, :post_id)
+  end
 end
