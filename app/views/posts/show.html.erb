@@ -49,15 +49,14 @@
     </div>
   <% end %>
 
-  <h3>Add Comment</h3>
-    <%= form_for([@post, @post.comments.build]) do |f| %>
-      <p>
-        <%= f.text_field(:text, {:class => 'form-control my-2 bg-light'}) %>
-      </p>
-      <p>
-        <%= f.submit({:class => 'btn btn-success my-2'}) %>
-      </p>
-    <% end %>
+  <%= form_for([@post, @post.comments.build]) do |f| %>
+    <p>
+      <%= f.text_field(:text, {:class => 'form-control my-2 bg-light'}) %>
+    </p>
+    <p>
+      <%= f.submit({:class => 'btn btn-success my-2'}) %>
+    </p>
+  <% end %>
   
   <% if current_user == @post.user %>
   <p class="h3">Author actions:</p>
