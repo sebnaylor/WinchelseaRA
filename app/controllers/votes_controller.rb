@@ -9,11 +9,11 @@ class VotesController < ApplicationController
       v.user = current_user
       prev_vote = find_previous_vote
 
-      if prev_vote.upvote != true?(params['upvote'])
+      if prev_vote == [] && v.save
+        redirect_to post_path(@post)
+      elsif prev_vote.upvote != true?(params['upvote'])
         prev_vote.upvote = true?(params['upvote'])
         prev_vote.save
-        redirect_to post_path(@post)
-      elsif v.save
         redirect_to post_path(@post)
       else
         redirect_to post_url(@post), alert: "You may only vote on a post once."
@@ -44,7 +44,11 @@ class VotesController < ApplicationController
   def find_previous_vote
     post = Post.find(params["post_id"].to_i)
     vote = post.votes.where(user_id: current_user).map(&:attributes)
-    Vote.find(vote[0]['id'])
+    if vote == []
+      []
+    else 
+      Vote.find(vote[0]['id'])
+    end
   end
 
   def true?(obj)
